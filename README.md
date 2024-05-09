@@ -1,4 +1,4 @@
-# Renton Technical College CSI-248
+# Renton Technical College CSI-245
 
 <br />
 
@@ -7,9 +7,9 @@
     <h3 align="center">Guided Activity 4</h3>
 </div>
 
-This repository is a part of CSI-248 at Renton Technical College.
+This repository is a part of CSI-246 at Renton Technical College.
 
-## Guided Activity 4
+## Guided Activity 5
 
 1. Clone the repository to your local machine. (Do not use OneDrive for assignments in this course!)
 2. Make note of the folder where you cloned the repository.
