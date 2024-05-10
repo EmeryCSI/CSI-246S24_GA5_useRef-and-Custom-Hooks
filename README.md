@@ -1,4 +1,4 @@
-# Renton Technical College CSI-245
+# Renton Technical College CSI-246
 
 <br />
 
@@ -18,16 +18,14 @@ This repository is a part of CSI-246 at Renton Technical College.
 
 5. Open the terminal in Visual Studio Code by hitting ctrl + \` or cmd + \` on mac.
 6. Create a new React project in the current directory using vite
-7. Name the project citylist
+7. Name the project id-card-app
 8. Select React as the framework
 9. Select JavaScript as the variant
 10. cd into the new project folder and run:
-11. `npm install`
-12. `npm install react-router-dom`
-
-![Alt text](<Images/GA4 - Step 12.png>)
-
+11. `npm install jspdf`
+12. We will be using the jsPDF library to create a PDF of our ID card. [text](https://www.npmjs.com/package/jspdf)
 13. Run `mkdir Screenshots` to create a Screenshots folder.
+14. Lauch your application with `npm run dev`
 
 ## Project Setup
 
@@ -35,204 +33,799 @@ This repository is a part of CSI-246 at Renton Technical College.
 2. Create a basic h2 inside of a fragment for App.jsx.
 3. Take a screenshot and save it to your screenshot folder.
 
-![Alt text](<Images/GA4 - Project Setup - Step 3.png>)
-
-4. Included in the repository is a cities.js file, paste the contents of that file at the top of App.jsx
-5. When complete your App.jsx should look like this. Notice that I have collapsed the cities array here, it is taking up 27 lines of code.
-
-![Alt text](<Images/GA4 - Project Setup - Step 5.png>)
-
-6. In Terminal, type `npm run dev`. Make sure you are in the citylist folder.
-7. You should have just App as an H2 showing on the page.
-
-![Alt text](<Images/GA4 - Project Setup - Step 7.png>)
-
-8. Take a screenshot of the browser and save it to the Screenshots folder.
-9. `git add .`
-10. `git commit -m "project setup complete"`
-11. `git push`
-
-## Lets create some pages
-
-1. Create a new folder inside of src called Pages.
-2. Within this folder create the following Components. Create.jsx, Details.jsx, Home.jsx, and List.jsx
-3. Within each component simply create an h2 with the name of the component.
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 3.png>)
-
-4. Let's first test these new components out and make sure they are working.
-5. Inside App.jsx import each of these components and display them on the page.
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 5.png>)
-
-6. Take a screenshot of your browser and save it to your Screenshots folder.
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 6.png>)
-
-7. Once you have verified they are working you can remove the components from inside of the return(). We are going to render these based on a route.
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 7.png>)
-
-8. Lets create some Routes. We need to import some Components from react-router-dom. Add this to the top of App.jsx
-
-`import { BrowserRouter, Route, Routes } from "react-router-dom";`
-
-9. The BrowserRouter component must wrap all components that will use Routing
-10. Within the BrowserRouter we will define Routes using the Routes and Route components
-11. Replace the code inside of App.jsx with the following:
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 11.png>)
-
-12. We have defined 4 routes. If no route is provided we will show the Home Page.
-13. If we navigate to /cities we will show the List page.
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 13.png>)
-
-14. If we navigate to /cities/create we will show the Create page.
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 14.png>)
-
-15. If we navigate to /cities/1 we will show the Details page
-
-![Alt text](<Images/GA4 - Lets Create Some Pages - Step 15.png>)
-
-16. Verify that these routes are working by running the app and navigating to them.
-17. Take a screenshot of each page and save them to your screenshots folder.
-18. `git add .`
-19. `git commit -m "Routes working"`
-20. `git push`
-
-## Create navigation and Context
-
-1. Create a Components folder inside of the src folder.
-2. Add a Navigation.jsx component to that folder.
-3. At its core a navbar is simply a styled list of links.
-4. We will be using the Link component from react-router-dom.
-5. Replace the code inside of Navigation.jsx with the following:
-
-![Alt text](<Images/GA4 - Create Navigation and Content - Step 5.png>)
-
-6. Notice that the to attribute of these links is the same as some of the routes you define earlier.
-7. Import Nagivation to App.jsx and render it within the browser router but before the routes.
-
-![Alt text](<Images/GA4 - Create Navigation and Content - Step 7.png>)
-
-8. Run the app and verify that Nagivation is working:
-
-![Alt text](<Images/GA4 - Create Navigation and Content - Step 8.png>)
-
-9. Take a screenshot of the browser and add it to your Screenshots folder.
-10. It is now time to useContext.
-11. Context is a global state container that can be used by any component without passing via props.
-12. We are going to add two things to context. The list of cities and a function for creating a new city.
-13. citiesList will be tracked by state in App.jsx but shared with the other pages via context.
-14. Similarly the createCity function will also be in App.jsx but accessible to the other pages via context.
-15. Lets first create the citiesList state and createCity functions.
-16. At the top of App.jsx add an import statement for useState and createContext.
-
-`import { useState, createContext } from "react";`
-
-17. Inside of the App() function but before the return statement add the cities to a state variable called citiesList.
-18. Also inside of App() and before the return statement create a function that takes a city as a parameter, assigns it an id and then uses setCitiesList to update the list.
-
-![Alt text](<Images/GA4 - Create Navigation and Content - Step 18.png>)
-
-19. We are now ready to create a ContextContainer. This is done using the createContext method that we imported earlier.
-20. Create a CitiesContext before the function App()
-
-![Alt text](<Images/GA4 - Create Navigation and Content - Step 20.png>)
-
-21. Our new CitiesContext is ready to be used. We need to wrap all elements that will have access to this Context in a CitiesContext.Provider component. The value attribute will be used to specify which object we would like to provide through this context.
-
-![Alt text](<Images/GA4 - Create Navigation and Content - Step 21.png>)
-
-22. We have wrapped all of our routes with our new Context and added both citiesList and createCity to that context. We now must also export the CitiesContext so that it can be imported by our other pages. Add the following to the bottom of App.jsx
-
-![Alt text](<Images/GA4 - Create Navigation and Content - Step 22.png>)
-
-23. `git add .`
-24. `git commit -m "Context added"`
-25. `git push`
-
-## Accessing the Context
-
-1. Lets work on the Details page first.
-2. In the route created for the details page we can see that details takes an id.
-3. We will need to get that id from the route and then go through the citiesList to find the city with a matching id.
-4. We will need access to the citiesList from context as well as the useParams method from react-router-dom to get the id from the route.
-5. import the following at the top of Details.jsx
-
-![Alt text](<Images/GA4 - Accessing the Context - Step 5.png>)
-
-6. useContext allows us to access our CitiesContext, useParams() will give us the id from the url
-7. Replace the Details function with the following code:
-
-![Alt text](<Images/GA4 - Accessing the Context - Step 7.png>)
-
-8. Run the app and test it out. If you navigate to /cities/1 you should see the following:
-
-![Alt text](<Images/GA4 - Accessing the Context - Step 8.png>)
-
-9. Providing a different id will give you a different city.
-10. Take a screenshot of the browser and save it to your Screenshots folder.
-
-11. Now we are ready to work on the list. This list page will show all of the cities in the list and provide a link for each city to the Details page.
-12. The List page will import useContext, CitiesContext, and Link
-13. At the top of the List page add the following:
-
-![Alt text](<Images/GA4 - Accessing the Context - Step 13.png>)
-
-14. Replace the List Function with the following:
-
-![Alt text](<Images/GA4 - Accessing the Context - Step 14.png>)
-
-15. You should now have a functioning list page that links to the details page.
-
-![Alt text](<Images/GA4 - Accessing the Context - Step 15.png>)
-
-16. Take a screenshot of the browser and save it to your Screenshots folder.
-17. `git add .`
-18. `git commit -m "List and Details Complete"`
-19. `git push`
-
-## The Create Page
-
-1. Our create page will allow the user to add a new city to the list.
-2. It will contain a form and need access to the creatCity function that we added to Context.
-3. We will need useContext and the CitiesContext for create.
-4. Add these import statements to the top of Create.jsx
-5. Lets start with the HTML for this page first since it is fairly long.
-6. Create an HTML form for adding a city and set the onSubmit event to call a function called handleSubmit
-
-![Alt text](<Images/GA4 - The Create Page - Step 6.png>)
-
-7. Now lets work on our handleSubmit function. This function will take in an event. The event will have the information from the form. By default events cause a page refresh which we do not want since we are handling the client side. Prevent the default refresh and then get the data from the form. We then pass the data to the createCity function and reset the form.
-
-8. Replace the code inside of Create() with the following:
-
-![Alt text](<Images/GA4 - The Create Page - Step 8.png>)
-
-9. Use the form to create a new City.
-
-![Alt text](<Images/GA4 - The Create Page - Step 9.png>)
-
-10. Navigate to the Cities List and you should see your new City added to the list.
-
-![Alt text](<Images/GA4 - The Create Page - Step 10.png>)
-
-11. Click on the new city and observe the Details page.
-
-![Alt text](<Images/GA4 - The Create Page - Step 11.png>)
-
-12. Add styling to the navbar so that it looks like navigation and not simply a list of links.
-13. Style the form so that it is centered and inside of a container.
-14. You may use any css library that you wish or write your own.
-15. Here is an example. You do not need to match it exactly.
-
-![Alt text](<Images/GA4 - The Create Page - Step 15.png>)
-
-16. `git add .`
-17. `git commit -m "Assignment Complete"`
-18. `git push`
-
-If you have any questions about this assignment please reach out to myself or our TA for this course.
+![Image showing App.jsx with h2 inside of a fragment](Images/1.png)
+
+4. In Terminal, type `npm run dev`. Make sure you are in the citylist folder.
+5. You should have just App as an H2 showing on the page.
+
+6. `git add .`
+7. `git commit -m "project setup complete"`
+8. `git push`
+
+## Create the useForm Hook
+
+1. We will be using a form to collect the new employee information.
+2. To process and validate the input from that form we will create a custom hook called useForm.
+3. Inside of the src folder create a folder called hooks and inside of that folder create a file called useForm.js.
+
+```javascript
+import { useState } from "react";
+
+//we are going to take in a callback function instead of the initial values
+//This will allows us to validate the form data and call the callback function
+//only if the form data is valid
+const useForm = (callback) => {};
+```
+
+### Step 1: Initialize State with `useState`
+
+**Purpose**: Initialize the state to keep track of the form inputs and any validation errors.
+
+```javascript
+const [inputs, setInputs] = useState({});
+const [errors, setErrors] = useState({});
+```
+
+- `inputs` will store the current value of each form input field.
+- `errors` will store any validation errors for each input field.
+
+### Step 2: Define the `handleInputChange` Function
+
+**Purpose**: Update the `inputs` state as the user types into the form fields and clear errors for the field being edited.
+
+```javascript
+const handleInputChange = (event) => {
+  setInputs((inputs) => ({
+    ...inputs,
+    [event.target.name]: event.target.value,
+  }));
+  setErrors((errors) => ({
+    ...errors,
+    [event.target.name]: "", // Clear any errors for the current input
+  }));
+};
+```
+
+- This function takes an event object from the input field that triggered the change.
+- Updates the `inputs` state by copying the existing `inputs` object and updating the value of the changed input using `[event.target.name]: event.target.value`.
+- Clears the error for the specific field that is being edited, if any.
+
+### Step 3: Define the `validate` Function
+
+**Purpose**: Check if the input fields are filled out correctly according to specified validation rules.
+
+```javascript
+const validate = (fields) => {
+  const errors = {};
+  if (!fields.name) {
+    errors.name = "Name is required";
+  }
+  if (!fields.position) {
+    errors.position = "Position is required";
+  }
+  if (!fields.department) {
+    errors.department = "Department is required";
+  }
+  if (!fields.idNumber) {
+    errors.idNumber = "Employee ID Number is required";
+  }
+  if (fields.idNumber && !/^\d{9}$/.test(fields.idNumber)) {
+    errors.idNumber = "Employee ID Number must be 9 digits";
+  }
+  return errors;
+};
+```
+
+- Validates each field based on conditions. For instance, it checks if the `name`, `position`, `department`, and `idNumber` fields are not empty.
+- For the `idNumber`, it also checks if it is exactly 9 digits using a regular expression.
+
+### Step 4: Define the `handleSubmit` Function
+
+**Purpose**: Handle the form submission event, perform validation, and call the provided callback if the form data is valid.
+
+```javascript
+const handleSubmit = (event) => {
+  if (event) {
+    event.preventDefault(); // Prevent the default form submission action
+  }
+  const validationErrors = validate(inputs);
+  setErrors(validationErrors); // Update the errors state with any new errors
+  if (Object.keys(validationErrors).length === 0) {
+    callback(inputs); // Call the callback function with the inputs if no errors
+    setInputs({}); // Optionally reset the form inputs after a successful submission
+  }
+};
+```
+
+- Prevents the form from being submitted the traditional way (which causes the page to reload).
+- Validates the current form inputs.
+- If there are no errors, it calls the `callback` function provided as a parameter to `useForm`, passing the `inputs` as its argument. This could be a function to process the form data, such as sending it to a server.
+
+### Step 5: Return from the Hook
+
+**Purpose**: Provide the form-related functionalities and state to the component that uses this hook.
+
+```javascript
+return {
+  handleSubmit,
+  handleInputChange,
+  inputs,
+  errors,
+};
+```
+
+- This return statement makes the `handleSubmit`, `handleInputChange`, `inputs`, and `errors` available to any React component that uses this hook.
+
+### Usage
+
+To use `useForm`, you would import it into a component and provide a callback function that should run when the form is successfully submitted without errors.
+
+### Full Code for `useForm` Hook
+
+```javascript
+import { useState } from "react";
+
+//we are going to take in a callback function instead of the initial values
+//This will allows us to validate the form data and call the callback function
+//only if the form data is valid
+const useForm = (callback) => {
+  //initialize the state for the form inputs
+  const [inputs, setInputs] = useState({});
+  //track any errors with state
+  const [errors, setErrors] = useState({});
+
+  //function that handles the form submission
+  const handleSubmit = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    //validate the form inputs
+    const validationErrors = validate(inputs);
+    //set the errors in the state
+    setErrors(validationErrors);
+    //if there are no errors, call the callback function
+    if (Object.keys(validationErrors).length === 0) {
+      callback(); // Trigger the callback if no errors
+      setInputs({}); // Optionally reset form after submission
+    }
+  };
+
+  //function that handles the change of form imputs
+  const handleInputChange = (event) => {
+    setInputs((inputs) => ({
+      ...inputs,
+      [event.target.name]: event.target.value,
+    }));
+    setErrors((errors) => ({ ...errors, [event.target.name]: "" })); // Clear error on change
+  };
+  //function to validate the form inputs
+  //This function only checks if the fields are empty
+  //This validation logic could be extended to check for other conditions
+  const validate = (fields) => {
+    //initialize the errors object
+    const errors = {};
+    if (!fields.name) {
+      errors.name = "Name is required";
+    }
+    if (!fields.position) {
+      errors.position = "Position is required";
+    }
+    if (!fields.department) {
+      errors.department = "Department is required";
+    }
+    if (!fields.idNumber) {
+      errors.idNumber = "Employee ID Number is required";
+    }
+    // check that idnumber is 9 digits and numbers only
+    if (fields.idNumber && !/^\d{9}$/.test(fields.idNumber)) {
+      errors.idNumber = "Employee ID Number must be 9 digits";
+    }
+    return errors;
+  };
+
+  return {
+    handleSubmit,
+    handleInputChange,
+    inputs,
+    errors,
+  };
+};
+
+export default useForm;
+```
+
+## Create the IdForm Component
+
+Inside of the src folder create a folder named `components`.
+Inside of the components folder create a file called `IdForm.jsx`.
+
+### Step `: Create the `IdForm` Component
+
+**Open `IdForm.jsx` and set up the component:**
+
+- Import the `useForm` hook.
+- Define the `IdForm` functional component accepting `onSubmit` as a prop.
+- Destructure the `inputs`, `errors`, `handleInputChange`, and `handleSubmit` from the `useForm` hook.
+
+```javascript
+import useForm from "../hooks/useForm";
+
+function IdForm({ onSubmit }) {
+  const { inputs, errors, handleInputChange, handleSubmit } = useForm(() => {
+    onSubmit(inputs);
+  });
+
+  return (
+    // Define the form with inputs and submit button
+  );
+}
+
+export default IdForm;
+```
+
+**Implement the form rendering:**
+
+- Inside the return statement of `IdForm`, set up a form that uses `handleInputChange` and `handleSubmit`.
+- Include input fields for `name`, `position`, `department`, and `idNumber`.
+- Display any validation errors next to the respective fields.
+
+```javascript
+//Form that takes in the inputs and errors from the useForm hook
+//handle submit is coming from the custom hook
+return (
+  <div className="form-container">
+    <h2>Create new Id Card</h2>
+    <form onSubmit={handleSubmit}>
+      <input
+        name="name"
+        placeholder="Name"
+        onChange={handleInputChange}
+        value={inputs.name || ""}
+      />
+      {errors.name && <div className="error">{errors.name}</div>}
+      <input
+        name="position"
+        placeholder="Position"
+        onChange={handleInputChange}
+        value={inputs.position || ""}
+      />
+      {errors.position && <div className="error">{errors.position}</div>}
+      <input
+        name="department"
+        placeholder="Department"
+        onChange={handleInputChange}
+        value={inputs.department || ""}
+      />
+      {errors.department && <div className="error">{errors.department}</div>}
+      <input
+        name="idNumber"
+        placeholder="Employee ID Number"
+        onChange={handleInputChange}
+        value={inputs.idNumber || ""}
+      />
+      {errors.idNumber && <div className="error">{errors.idNumber}</div>}
+      <button type="submit">Save Employee Info</button>
+    </form>
+  </div>
+);
+```
+
+### Full code for IdForm Component
+
+```javascript
+import React from "react";
+import useForm from "../hooks/useForm";
+
+//This form takes in a function called onSubmit
+function IdForm({ onSubmit }) {
+  //pull in all of the functions we need from the useForm hook passing the onSubmit function
+  //to the callback
+  const { inputs, errors, handleInputChange, handleSubmit } = useForm(() => {
+    onSubmit(inputs); // Pass the form data up on successful submission
+  });
+  //Form that takes in the inputs and errors from the useForm hook
+  //handleSubmit is coming from the custom hook
+  return (
+    <div className="form-container">
+      <h2>Create new Id Card</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          name="name"
+          placeholder="Name"
+          onChange={handleInputChange}
+          value={inputs.name || ""}
+        />
+        {errors.name && <div className="error">{errors.name}</div>}
+        <input
+          name="position"
+          placeholder="Position"
+          onChange={handleInputChange}
+          value={inputs.position || ""}
+        />
+        {errors.position && <div className="error">{errors.position}</div>}
+        <input
+          name="department"
+          placeholder="Department"
+          onChange={handleInputChange}
+          value={inputs.department || ""}
+        />
+        {errors.department && <div className="error">{errors.department}</div>}
+        <input
+          name="idNumber"
+          placeholder="Employee ID Number"
+          onChange={handleInputChange}
+          value={inputs.idNumber || ""}
+        />
+        {errors.idNumber && <div className="error">{errors.idNumber}</div>}
+        <button type="submit">Save Employee Info</button>
+      </form>
+    </div>
+  );
+}
+
+export default IdForm;
+```
+
+### Step 4: Test Your Component
+
+1. Render the IdForm component in your main App component.
+2. Take a screenshot and save it to your screenshot folder.
+3. `git add .`
+4. `git commit -m "form complete"`
+5. `git push`
+
+## Create the IDCardPreview Component
+
+Inside of the `src/components` folder create a file called `IDCardPreview.jsx`.
+This component will display the employee information once the form is complete.
+
+### Step 1: Implement the Component
+
+**Open `IDCardPreview.jsx` and start coding the component:**
+
+- Define the `IDCardPreview` functional component. This component should take props that include `cardInfo` for the employee's details and `imageData` for the captured image.
+
+```javascript
+//Component that previews the ID card with the information entered by the user and the image uploaded by the user.
+function IdCardPreview({ cardInfo, imageData }) {
+  return (
+    <div>
+      <h2>Employee ID Card Preview</h2>
+      <div>
+        <p>
+          <strong>Name:</strong> {cardInfo.name}
+        </p>
+        <p>
+          <strong>Position:</strong> {cardInfo.position}
+        </p>
+        <p>
+          <strong>Department:</strong> {cardInfo.department}
+        </p>
+        <p>
+          <strong>Id Number:</strong> {cardInfo.idNumber}
+        </p>
+        {imageData && (
+          <img src={imageData} alt="Employee" style={{ width: "300px" }} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default IdCardPreview;
+```
+
+## Create the WebcamCapture Component
+
+This component will use the webcam to capture an image that will be displayed on the ID card.
+This is a common application of the useRef and useState hooks in React.
+
+### Step 1: Create the Component File
+
+- Create a component file named `WebcamCapture.jsx` inside the `src/components` folder.
+
+### Step 2: Implement the Component
+
+**Open `WebcamCapture.js` and write the component code:**
+
+- Import useRef and useState from React.
+- Setup state management for controlling the webcam and capturing images.
+
+```javascript
+import React, { useRef, useState } from "react";
+
+/**
+ * A React component to capture images from a webcam.
+ * Uses useRef to manage DOM references and useState for component state.
+ */
+function WebcamCapture({ onCapture, cardInfo }) {
+  const videoRef = useRef(null); // Reference to the video element
+  const canvasRef = useRef(null); // Reference to the canvas element
+  const [isCameraOn, setIsCameraOn] = useState(false); // State to manage camera status
+
+  /**
+   * Starts the video stream from the webcam.
+   * Asks the user for permission to use the webcam and plays the video stream.
+   */
+  const startVideo = () => {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
+          setIsCameraOn(true);
+        })
+        .catch((err) => {
+          console.error("Error accessing the webcam: ", err);
+        });
+    } else {
+      alert("Sorry, your browser does not support webcam functionality.");
+    }
+  };
+
+  /**
+   * Captures an image from the video stream and sends it to the parent component.
+   * Draws the current video frame onto a canvas and converts it to a data URL.
+   */
+  const captureImage = () => {
+    //get the references to the canvas, video and context
+    const canvas = canvasRef.current;
+    const video = videoRef.current;
+    const context = canvas.getContext("2d");
+    if (context && video) {
+      // Draw the video frame to the canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      // Convert the canvas image to a data URL
+      const imageDataUrl = canvas.toDataURL("image/jpeg");
+      onCapture(imageDataUrl);
+      // Optionally, you can stop the video stream after capture
+      const stream = video.srcObject;
+      const tracks = stream.getTracks();
+      tracks.forEach((track) => track.stop());
+      setIsCameraOn(false);
+    }
+  };
+
+  return (
+    <div>
+      {isCameraOn ? (
+        <button onClick={captureImage}>Capture Image</button>
+      ) : (
+        <button onClick={startVideo}>Start Camera</button>
+      )}
+      <video
+        ref={videoRef}
+        style={{ display: isCameraOn ? "block" : "none" }}
+        width="640"
+        height="480"
+      ></video>
+      <canvas
+        ref={canvasRef}
+        style={{ display: "none" }}
+        width="640"
+        height="480"
+      ></canvas>
+    </div>
+  );
+}
+
+export default WebcamCapture;
+```
+
+## App.jsx
+
+Let's bring all of our new functionality into App.jsx.
+
+### Step 1: Implement `App.jsx`
+
+**Open `App.jsx` and begin coding:**
+
+1. **Import Dependencies and Components**:
+
+   - Import useState from 'react'.
+   - Import the components and jsPDF.
+   - Import styles
+
+   ```javascript
+   import React, { useState } from "react";
+   import IdForm from "./components/IdForm";
+   import WebcamCapture from "./components/WebcamCapture";
+   import IDCardPreview from "./components/IDCardPreview";
+   import { jsPDF } from "jspdf";
+   import "./App.css"; // Assuming you have some global styles
+   ```
+
+2. **Setup State**:
+
+   - Define state variables for handling card information and image data.
+
+   ```javascript
+   const [cardInfo, setCardInfo] = useState(null);
+   const [imageData, setImageData] = useState(null);
+   ```
+
+3. **Form Submission Handler**:
+
+   - Implement a function to handle form submissions.
+
+   ```javascript
+   const handleFormSubmit = (data) => {
+     setCardInfo(data);
+   };
+   ```
+
+4. **Image Capture Handler**:
+
+   - Implement a function to handle image capture from the webcam.
+
+   ```javascript
+   const handleCapture = (image) => {
+     setImageData(image);
+   };
+   ```
+
+5. **PDF Generation Function**:
+
+   - Implement a function to generate a PDF using captured data.
+
+   ```javascript
+   //function to download the PDF
+   const downloadPDF = () => {
+     if (!cardInfo || !imageData) return;
+     //create a new jsPDF instance
+     const doc = new jsPDF({
+       orientation: "landscape",
+       unit: "px",
+       format: [320, 240],
+     });
+     //create a new image element
+     const img = new Image();
+     //set the source to the imageData
+     img.src = imageData;
+     //when the image is loaded, calculate the aspect ratio
+     img.onload = () => {
+       const imgAspectRatio = img.width / img.height;
+       const imgHeight = 150; // Desired image height in the PDF
+       const imgWidth = imgHeight * imgAspectRatio; // Calculate width maintaining aspect ratio
+       const pageWidth = doc.internal.pageSize.getWidth();
+       const startX = (pageWidth - imgWidth) / 2; // Calculate the starting X position to center the image
+       //the doc obhect allows you to add text and images to the PDF
+       doc.text(`Name: ${cardInfo.name}`, 10, 20);
+       doc.text(`Position: ${cardInfo.position}`, 10, 40);
+       doc.text(`Department: ${cardInfo.department}`, 10, 60);
+       doc.addImage(imageData, "JPEG", startX, 80, imgWidth, imgHeight); // Add the captured image centered
+       doc.text(`Id Number: ${cardInfo.idNumber}`, 10, 240);
+       //save the PDF with the name of the employee
+       doc.save(`${cardInfo.name}_id.pdf`);
+     };
+   };
+   ```
+
+6. **Conditional Rendering**:
+
+   - Render components based on the state.
+
+   ```javascript
+   if (!cardInfo) {
+     return <IdForm onSubmit={handleFormSubmit} />;
+   }
+
+   return (
+     <div className="container">
+       {imageData ? (
+         <IDCardPreview
+           cardInfo={cardInfo}
+           imageData={imageData}
+           onEdit={() => setCardInfo(null)}
+         />
+       ) : (
+         <WebcamCapture onCapture={handleCapture} />
+       )}
+       {imageData && (
+         <button onClick={downloadPDF}>Download ID Card as PDF</button>
+       )}
+     </div>
+   );
+   ```
+
+### Step 5: Style `App.jsx`
+
+Ensure the application is styled appropriately:
+
+- Use CSS in `App.css` or inline styles to style the container and any other elements as needed.
+
+```css
+/* General Resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f4f9;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Styling for the main container */
+.container {
+  width: 100%;
+  max-width: 600px;
+  padding: 50px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Form styling */
+.form-container {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%; /* Ensures the input stretches to the container width */
+}
+
+button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #004494;
+}
+
+/* Webcam and preview styling */
+video,
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Error messages */
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+```
+
+### Here is the full code for App.jsx
+
+```javascript
+import React, { useState } from "react";
+import IdForm from "./components/IdForm";
+import WebcamCapture from "./components/WebcamCapture";
+import IdCardPreview from "./components/IdCardPreview";
+import { jsPDF } from "jspdf";
+import "./App.css"; // Ensure CSS is properly imported
+
+//our app needs to track two things: the form data and the image data
+function App() {
+  const [cardInfo, setCardInfo] = useState(null);
+  const [imageData, setImageData] = useState(null);
+
+  //function to handle the form submission
+  const handleFormSubmit = (data) => {
+    setCardInfo(data); // Save form data to state
+  };
+  //function to handle the image capture
+  const handleCapture = (image) => {
+    setImageData(image); // Save captured image data to state
+  };
+  //function to download the PDF
+  const downloadPDF = () => {
+    if (!cardInfo || !imageData) return;
+    //create a new jsPDF instance
+    const doc = new jsPDF({
+      orientation: "landscape",
+      unit: "px",
+      format: [320, 240],
+    });
+    //create a new image element
+    const img = new Image();
+    //set the source to the imageData
+    img.src = imageData;
+    //when the image is loaded, calculate the aspect ratio
+    img.onload = () => {
+      const imgAspectRatio = img.width / img.height;
+      const imgHeight = 150; // Desired image height in the PDF
+      const imgWidth = imgHeight * imgAspectRatio; // Calculate width maintaining aspect ratio
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const startX = (pageWidth - imgWidth) / 2; // Calculate the starting X position to center the image
+      //the doc obhect allows you to add text and images to the PDF
+      doc.text(`Name: ${cardInfo.name}`, 10, 20);
+      doc.text(`Position: ${cardInfo.position}`, 10, 40);
+      doc.text(`Department: ${cardInfo.department}`, 10, 60);
+      doc.addImage(imageData, "JPEG", startX, 80, imgWidth, imgHeight); // Add the captured image centered
+      doc.text(`Id Number: ${cardInfo.idNumber}`, 10, 240);
+      //save the PDF with the name of the employee
+      doc.save(`${cardInfo.name}_id.pdf`);
+    };
+  };
+  //function to clear the info
+  const clearCardInfo = () => {
+    setCardInfo(null);
+    setImageData(null); // Optionally clear the image data as well
+  };
+  //if there is no cardInfo, render the IdForm
+  if (!cardInfo) {
+    return <IdForm onSubmit={handleFormSubmit} />;
+  }
+  //if there is cardInfo and there is imageData, render the IdCardPreview
+  //if there is no imageData render the WebcamCapture
+  return (
+    <div className="container">
+      {imageData ? (
+        <IdCardPreview
+          cardInfo={cardInfo}
+          imageData={imageData}
+          onEdit={clearCardInfo}
+        />
+      ) : (
+        <WebcamCapture onCapture={handleCapture} />
+      )}
+      {imageData && (
+        <>
+          <button onClick={clearCardInfo}>Edit Information</button>
+          <button onClick={downloadPDF}>Download ID Card as PDF</button>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Step 6: Test the Application
+
+- Run your application:
+  ```bash
+  npm run dev
+  ```
+- Navigate through the form submission, image capturing, and PDF generation to ensure all functionalities work as expected.
+
+### Step 7: Take a Screenshot
+
+- Capture a screenshot of the application showing the webcam functioning.
+- Add a generated PDF file to the repository.
+
+### Conclusion
+
+You have successfully implemented a React application that captures employee information, allows image capture from the webcam, and generates a PDF ID card with the entered data and captured image. This project demonstrates the use of custom hooks, state management, and external libraries in a React application.
+
+## Commit your changes
+
+1. `git add .`
+2. `git commit -m "Guided Activity 5 complete"`
+3. `git push`
