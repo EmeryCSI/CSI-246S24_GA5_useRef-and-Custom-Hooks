@@ -828,3 +828,5 @@ You have successfully implemented a React application that captures employee inf
 1. `git add .`
 2. `git commit -m "Guided Activity 5 complete"`
 3. `git push`
+
+If you are having any problems with this assignment please come to office hours or scheduling a tutoring session with a TA.
