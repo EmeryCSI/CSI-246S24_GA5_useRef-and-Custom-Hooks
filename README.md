@@ -23,7 +23,7 @@ This repository is a part of CSI-246 at Renton Technical College.
 9. Select JavaScript as the variant
 10. cd into the new project folder and run:
 11. `npm install jspdf`
-12. We will be using the jsPDF library to create a PDF of our ID card. [text](https://www.npmjs.com/package/jspdf)
+12. We will be using the jsPDF library to create a PDF of our ID card. [jsPDF npm link](https://www.npmjs.com/package/jspdf)
 13. Run `mkdir Screenshots` to create a Screenshots folder.
 14. Lauch your application with `npm run dev`
 
@@ -33,9 +33,8 @@ This repository is a part of CSI-246 at Renton Technical College.
 2. Create a basic h2 inside of a fragment for App.jsx.
 3. Take a screenshot and save it to your screenshot folder.
 
-![Image showing App.jsx with h2 inside of a fragment](Images/1.png)
 
-4. In Terminal, type `npm run dev`. Make sure you are in the citylist folder.
+4. In Terminal, type `npm run dev`. Make sure you are in the id-card-app folder.
 5. You should have just App as an H2 showing on the page.
 
 6. `git add .`
