@@ -373,45 +373,45 @@ export default IdForm;
 4. `git commit -m "form complete"`
 5. `git push`
 
-## Create the IDCardPreview Component
+## Create the IdCardPreview Component
 
-Inside of the `src/components` folder create a file called `IDCardPreview.jsx`.
+Inside of the `src/components` folder create a file called `IdCardPreview.jsx`.
 This component will display the employee information once the form is complete.
 
 ### Step 1: Implement the Component
 
-**Open `IDCardPreview.jsx` and start coding the component:**
+**Open `IdCardPreview.jsx` and start coding the component:**
 
-- Define the `IDCardPreview` functional component. This component should take props that include `cardInfo` for the employee's details and `imageData` for the captured image.
+- Define the `IdCardPreview` functional component. This component should take props that include `cardInfo` for the employee's details and `imageData` for the captured image.
 
 ```javascript
 //Component that previews the ID card with the information entered by the user and the image uploaded by the user.
 function IdCardPreview({ cardInfo, imageData }) {
-  return (
-    <div>
-      <h2>Employee ID Card Preview</h2>
+    return (
       <div>
-        <p>
-          <strong>Name:</strong> {cardInfo.name}
-        </p>
-        <p>
-          <strong>Position:</strong> {cardInfo.position}
-        </p>
-        <p>
-          <strong>Department:</strong> {cardInfo.department}
-        </p>
-        <p>
-          <strong>Id Number:</strong> {cardInfo.idNumber}
-        </p>
-        {imageData && (
-          <img src={imageData} alt="Employee" style={{ width: "300px" }} />
-        )}
+        <h2>Employee ID Card Preview</h2>
+        <div>
+          <p>
+            <strong>Name:</strong> {cardInfo.name}
+          </p>
+          <p>
+            <strong>Position:</strong> {cardInfo.position}
+          </p>
+          <p>
+            <strong>Department:</strong> {cardInfo.department}
+          </p>
+          <p>
+            <strong>Id Number:</strong> {cardInfo.idNumber}
+          </p>
+          {imageData && (
+            <img src={imageData} alt="Employee" style={{ width: "300px" }} />
+          )}
+        </div>
       </div>
-    </div>
-  );
-}
-
-export default IdCardPreview;
+    );
+  }
+  
+  export default IdCardPreview;
 ```
 
 ## Create the WebcamCapture Component
