@@ -238,7 +238,7 @@ export default useForm;
 Inside of the src folder create a folder named `components`.
 Inside of the components folder create a file called `IdForm.jsx`.
 
-### Step `: Create the `IdForm` Component
+### Step 1 : Create the `IdForm` Component
 
 **Open `IdForm.jsx` and set up the component:**
 
@@ -365,7 +365,7 @@ function IdForm({ onSubmit }) {
 export default IdForm;
 ```
 
-### Step 4: Test Your Component
+### Step 2: Test Your Component
 
 1. Render the IdForm component in your main App component.
 2. Take a screenshot and save it to your screenshot folder.
@@ -421,23 +421,23 @@ This is a common application of the useRef and useState hooks in React.
 
 ### Step 1: Create the Component File
 
-- Create a component file named `WebcamCapture.jsx` inside the `src/components` folder.
+- Create a component file named `WebCamCapture.jsx` inside the `src/components` folder.
 
 ### Step 2: Implement the Component
 
-**Open `WebcamCapture.js` and write the component code:**
+**Open `WebCamCapture.jsx` and write the component code:**
 
 - Import useRef and useState from React.
 - Setup state management for controlling the webcam and capturing images.
 
 ```javascript
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 /**
  * A React component to capture images from a webcam.
  * Uses useRef to manage DOM references and useState for component state.
  */
-function WebcamCapture({ onCapture, cardInfo }) {
+function WebCamCapture({ onCapture, cardInfo }) {
   const videoRef = useRef(null); // Reference to the video element
   const canvasRef = useRef(null); // Reference to the canvas element
   const [isCameraOn, setIsCameraOn] = useState(false); // State to manage camera status
@@ -509,7 +509,7 @@ function WebcamCapture({ onCapture, cardInfo }) {
   );
 }
 
-export default WebcamCapture;
+export default WebCamCapture;
 ```
 
 ## App.jsx
@@ -527,12 +527,12 @@ Let's bring all of our new functionality into App.jsx.
    - Import styles
 
    ```javascript
-   import React, { useState } from "react";
-   import IdForm from "./components/IdForm";
-   import WebcamCapture from "./components/WebcamCapture";
-   import IDCardPreview from "./components/IDCardPreview";
-   import { jsPDF } from "jspdf";
-   import "./App.css"; // Assuming you have some global styles
+import { useState } from "react";
+import IdForm from "./components/IdForm";
+import WebCamCapture from "./components/WebCamCapture";
+import IdCardPreview from "./components/IdCardPreview";
+import { jsPDF } from "jspdf";
+import "./App.css"; // Ensure CSS is properly imported
    ```
 
 2. **Setup State**:
@@ -613,13 +613,13 @@ Let's bring all of our new functionality into App.jsx.
    return (
      <div className="container">
        {imageData ? (
-         <IDCardPreview
+         <IdCardPreview
            cardInfo={cardInfo}
            imageData={imageData}
            onEdit={() => setCardInfo(null)}
          />
        ) : (
-         <WebcamCapture onCapture={handleCapture} />
+         <WebCamCapture onCapture={handleCapture} />
        )}
        {imageData && (
          <button onClick={downloadPDF}>Download ID Card as PDF</button>
@@ -721,9 +721,9 @@ img {
 ### Here is the full code for App.jsx
 
 ```javascript
-import React, { useState } from "react";
+import { useState } from "react";
 import IdForm from "./components/IdForm";
-import WebcamCapture from "./components/WebcamCapture";
+import WebCamCapture from "./components/WebCamCapture";
 import IdCardPreview from "./components/IdCardPreview";
 import { jsPDF } from "jspdf";
 import "./App.css"; // Ensure CSS is properly imported
@@ -791,7 +791,7 @@ function App() {
           onEdit={clearCardInfo}
         />
       ) : (
-        <WebcamCapture onCapture={handleCapture} />
+        <WebCamCapture onCapture={handleCapture} />
       )}
       {imageData && (
         <>
